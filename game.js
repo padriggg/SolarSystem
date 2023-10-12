@@ -1,4 +1,4 @@
-//import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.118/build/three.module.js';
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.118/build/three.module.js';
 import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.118.1/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.118/examples/jsm/controls/OrbitControls.js';
 
@@ -63,7 +63,7 @@ const parent4= new THREE.Object3D()
 
 
 const geometry = new THREE.SphereGeometry(20, 60, 60);
-const material = new THREE.MeshStandardMaterial({ roughness: 0.8, map: new THREE.TextureLoader().load('sun.jpg') });
+const material = new THREE.MeshStandardMaterial({ roughness: 0.8, map: new THREE.TextureLoader().load('/pics/sun.jpg') });
 const sphere = new THREE.Mesh(geometry, material);
 sphere.position.y=0
 scene.add(sphere);
@@ -74,7 +74,7 @@ const material1 = new THREE.MeshStandardMaterial({ color: 0xffff00, wireframe:tr
 const cube = new THREE.Mesh(geometry1, material1);
 scene.add(cube);*/
 const geometry2 = new THREE.SphereGeometry(10, 60, 60);
-const material2 = new THREE.MeshStandardMaterial({  roughness: 0.8, map: new THREE.TextureLoader().load('pa.png') });
+const material2 = new THREE.MeshStandardMaterial({  roughness: 0.8, map: new THREE.TextureLoader().load('/pics/pa.png') });
 const stab = new THREE.Mesh(geometry2, material2);
 stab.position.z=-40
 parent1.add(stab)
@@ -83,7 +83,7 @@ scene.add(parent1);
 
 
 const geometry3 = new THREE.SphereGeometry(10, 60, 60);
-const material3 = new THREE.MeshStandardMaterial({ roughness: 0.8, map: new THREE.TextureLoader().load('s.png') });
+const material3 = new THREE.MeshStandardMaterial({ roughness: 0.8, map: new THREE.TextureLoader().load('/pics/s.png') });
 const stab0 = new THREE.Mesh(geometry3, material3);
 stab0.position.x=70
 parent.add(stab0);
@@ -93,9 +93,9 @@ scene.add(parent)
 
 const geometry4 = new THREE.SphereGeometry(10, 60, 60);
 
-const material4 = [new THREE.MeshStandardMaterial({  roughness: 0.8, wireframe:false, map: new THREE.TextureLoader().load('m.png') ,
+const material4 = [new THREE.MeshStandardMaterial({  roughness: 0.8, wireframe:false, map: new THREE.TextureLoader().load('/pics/m.png') ,
 side: THREE.FrontSide}),
- new THREE.MeshStandardMaterial({  roughness: 0.8, wireframe:false, map: new THREE.TextureLoader().load('m.png'),
+ new THREE.MeshStandardMaterial({  roughness: 0.8, wireframe:false, map: new THREE.TextureLoader().load('/pics/m.png'),
  side: THREE.BackSide})];
 
 const material44= new THREE.MeshFaceMaterial(material4)
@@ -107,7 +107,7 @@ scene.add(parent2);
 
 const geometry5 = new THREE.SphereGeometry(10, 60, 60);
 
-const material5 = new THREE.MeshStandardMaterial({ roughness: 0.8, wireframe:false, map: new THREE.TextureLoader().load('p.png') });
+const material5 = new THREE.MeshStandardMaterial({ roughness: 0.8, wireframe:false, map: new THREE.TextureLoader().load('/pics/p.png') });
 const stab2 = new THREE.Mesh(geometry5, material5);
 stab2.position.z=-130
 parent3.add(stab2)
@@ -115,7 +115,7 @@ scene.add(parent3);
 
 
 const geometry6 = new THREE.SphereGeometry(10, 60, 60);
-const material6 = new THREE.MeshStandardMaterial({ roughness: 0.8, wireframe:false, map: new THREE.TextureLoader().load('a.png') });
+const material6 = new THREE.MeshStandardMaterial({ roughness: 0.8, wireframe:false, map: new THREE.TextureLoader().load('/pics/a.png') });
 const stab3 = new THREE.Mesh(geometry6, material6);
 stab3.position.z=-160
 parent4.add(stab3)
