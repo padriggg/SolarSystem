@@ -29,7 +29,7 @@ const controls = new OrbitControls(camera, renderer.domElement);
 
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
-renderer.setPixelRatio(2.5);
+renderer.setPixelRatio(2);
 
 camera.position.z = 130;
 
