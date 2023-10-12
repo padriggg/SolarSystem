@@ -5,7 +5,7 @@ import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.118/examples
 const sizes = {
    width: window.innerWidth,
    height: window.innerHeight
- }
+ } 
  
  window.addEventListener('resize', () => {
    // Update sizes
