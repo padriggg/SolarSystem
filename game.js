@@ -94,9 +94,10 @@ scene.add(parent)
 const geometry4 = new THREE.SphereGeometry(10, 60, 60);
 
 const material4 = [new THREE.MeshStandardMaterial({  roughness: 0.8, wireframe:false, map: new THREE.TextureLoader().load('/pics/m.png') ,
-side: THREE.FrontSide}),
- new THREE.MeshStandardMaterial({  roughness: 0.8, wireframe:false, map: new THREE.TextureLoader().load('/pics/m.png'),
- side: THREE.BackSide})];
+side: THREE.FrontSide}), ]
+
+ //new THREE.MeshStandardMaterial({  roughness: 0.8, wireframe:false, map: new THREE.TextureLoader().load('/pics/m.png'),
+ //side: THREE.BackSide})];
 
 const material44= new THREE.MeshFaceMaterial(material4)
 
