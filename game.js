@@ -29,12 +29,12 @@ const controls = new OrbitControls(camera, renderer.domElement);
 
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
-renderer.setPixelRatio(1.9);
+renderer.setPixelRatio(2);
 
 camera.position.z = 130;
 
 //Licht
-const pointLight = new THREE.PointLight(0xffffff, 1.3)
+const pointLight = new THREE.PointLight(0xffffff, 1.2)
 pointLight.position.set(0,0,0)
 
 const ambLight = new THREE.AmbientLight(0xffffff, 0.2)
@@ -42,7 +42,7 @@ const ambLight = new THREE.AmbientLight(0xffffff, 0.2)
 const spotLight = new THREE.SpotLight( 0xffffff,1 );
 spotLight.position.set( 100, 1000, 100 );
 
-const hemLight=new THREE.HemisphereLight(0xffffff,0x080820, 0.8)
+const hemLight=new THREE.HemisphereLight(0xffffff,0x080820, 0.5)
 
 
 const pointLightHelp= new THREE.PointLightHelper(pointLight)
@@ -63,7 +63,7 @@ const parent0= new THREE.Object3D()
 
 
 const geometry = new THREE.SphereGeometry(35, 60, 60);
-const material = new THREE.MeshStandardMaterial({ roughness: 0.8, map: new THREE.TextureLoader().load('/pics/sun.jpg') });
+const material = new THREE.MeshStandardMaterial({ roughness: 0.5, map: new THREE.TextureLoader().load('/pics/sun.jpg') });
 const sphere = new THREE.Mesh(geometry, material);
 sphere.position.y=0
 scene.add(sphere);
@@ -75,19 +75,27 @@ const cube = new THREE.Mesh(geometry1, material1);
 scene.add(cube);*/
 
 const malu=new THREE.TextureLoader().load('/pics/m.png')
-const kurt=new THREE.TextureLoader().load('/pics/p.png')
-const sim= new THREE.TextureLoader().load('/pics/s.png')
-const pat= new THREE.TextureLoader().load('/pics/pa.png')
-const gros=new THREE.TextureLoader().load('/pics/a.png')
+const malu1=new THREE.TextureLoader().load('/pics/m1.png')
 
+const kurt=new THREE.TextureLoader().load('/pics/p.png')
+const kurt1=new THREE.TextureLoader().load('/pics/p1.png')
+
+const sim= new THREE.TextureLoader().load('/pics/s.png')
+
+
+const pat= new THREE.TextureLoader().load('/pics/pa.png')
+const pat1= new THREE.TextureLoader().load('/pics/pa1.png')
+
+const gros=new THREE.TextureLoader().load('/pics/a.png')
+ 
 const options = {
 
-  speed_S: 0.05,
-  speed_P:0.05,
-  speed_M: 0.05,
-  speed_K:0.05,
-  speed_A:0.05, 
-
+  speed_S: 0.03,
+  speed_P:0.03,
+  speed_M: 0.03,
+  speed_K:0.03,
+  speed_A:0.03,
+ 
   size_S: 4,
   size_P: 4,
   size_M: 4,
@@ -99,10 +107,11 @@ const options = {
 
 
 const geometry2 = new THREE.SphereGeometry(options.size_P, 60, 60, Math.PI/2, Math.PI, 0, Math.PI);
-const material21 = new THREE.MeshStandardMaterial({  roughness: 0.8, map: pat });
+const material21 = new THREE.MeshStandardMaterial({  roughness: 0.5, map: pat });
+const material211 = new THREE.MeshStandardMaterial({  roughness: 0.5, map: pat1 });
 
 const stab1 = new THREE.Mesh(geometry2, material21);
-const stab10 = new THREE.Mesh(geometry2, material21);
+const stab10 = new THREE.Mesh(geometry2, material211);
 
 stab10.rotation.y=Math.PI
 var combStab= new THREE.Group()
@@ -115,10 +124,11 @@ scene.add(parent);
 
 
 const geometry3 = new THREE.SphereGeometry(options.size_S, 60, 60, Math.PI/2, Math.PI, 0, Math.PI);
-const material31 = new THREE.MeshStandardMaterial({  roughness: 0.8, map: sim });
+const material31 = new THREE.MeshStandardMaterial({  roughness: 0.5, map: sim });
+const material311 = new THREE.MeshStandardMaterial({  roughness: 0.5, map: sim });
 
 const stab2 = new THREE.Mesh(geometry3, material31);
-const stab20 = new THREE.Mesh(geometry3, material31);
+const stab20 = new THREE.Mesh(geometry3, material311);
 
 stab20.rotation.y=Math.PI
 var combStab0= new THREE.Group()
@@ -131,11 +141,11 @@ scene.add(parent0);
 
 
 const geometry4 = new THREE.SphereGeometry(options.size_M, 60, 60, Math.PI/2, Math.PI, 0, Math.PI);
-const material41 = new THREE.MeshStandardMaterial({  roughness: 0.8, map: malu });
-
+const material41 = new THREE.MeshStandardMaterial({  roughness: 0.5, map: malu });
+const material411 = new THREE.MeshStandardMaterial({  roughness: 0.5, map: malu1 });
 
 const stab3 = new THREE.Mesh(geometry4, material41);
-const stab30 = new THREE.Mesh(geometry4, material41);
+const stab30 = new THREE.Mesh(geometry4, material411);
 
 stab30.rotation.y=Math.PI
 var combStab1= new THREE.Group()
@@ -147,11 +157,11 @@ scene.add(parent1);
 
 
 const geometry5 = new THREE.SphereGeometry(options.size_K, 60, 60, Math.PI/2, Math.PI, 0, Math.PI);
-const material51 = new THREE.MeshStandardMaterial({  roughness: 0.8, map: kurt });
-
+const material51 = new THREE.MeshStandardMaterial({  roughness: 0.5, map: kurt });
+const material511 = new THREE.MeshStandardMaterial({  roughness: 0.5, map: kurt1 });
 
 const stab4 = new THREE.Mesh(geometry5, material51);
-const stab40 = new THREE.Mesh(geometry5, material51);
+const stab40 = new THREE.Mesh(geometry5, material511);
 
 stab40.rotation.y=Math.PI
 var combStab2= new THREE.Group()
@@ -164,11 +174,11 @@ scene.add(parent2);
 
 
 const geometry6 = new THREE.SphereGeometry(options.size_A, 60, 60, Math.PI/2, Math.PI, 0, Math.PI);
-const material61 = new THREE.MeshStandardMaterial({  roughness: 0.8, map: gros });
-
+const material61 = new THREE.MeshStandardMaterial({  roughness: 0.5, map: gros });
+const material611 = new THREE.MeshStandardMaterial({  roughness: 0.5, map: gros });
 
 const stab5 = new THREE.Mesh(geometry6, material61);
-const stab50 = new THREE.Mesh(geometry6, material61);
+const stab50 = new THREE.Mesh(geometry6, material611);
 
 stab50.rotation.y=Math.PI
 var combStab3= new THREE.Group()
@@ -193,7 +203,7 @@ gui.add(options, 'speed_K', 0, 0.06)
 gui.add(options, 'speed_A', 0, 0.06)
 
 
-gui.add(options, 'size_P', 2, 8)
+gui.add(options, 'size_P', 2,  8)
 gui.add(options, 'size_S', 2,  8)
 gui.add(options, 'size_M', 2,  8)
 gui.add(options, 'size_K', 2,  8)
