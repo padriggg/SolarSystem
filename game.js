@@ -61,9 +61,12 @@ const parent2= new THREE.Object3D()
 const parent3= new THREE.Object3D()
 const parent0= new THREE.Object3D()
 
+const normalTexture = new THREE.TextureLoader().load('/pics/normal.jpg');
 
 const geometry = new THREE.SphereGeometry(35, 60, 60);
-const material = new THREE.MeshStandardMaterial({ roughness: 0.5,metalness: 0.1, map: new THREE.TextureLoader().load('/pics/sun.jpg') });
+const material = new THREE.MeshStandardMaterial({ roughness: 0.2,metalness: 0.1, map: new THREE.TextureLoader().load('/pics/sun.jpg'), 
+normalMap: normalTexture });
+
 const sphere = new THREE.Mesh(geometry, material);
 sphere.position.y=0
 scene.add(sphere);
@@ -207,11 +210,11 @@ gui.add(options, 'speed_K', 0, 0.06)
 gui.add(options, 'speed_A', 0, 0.06)
 
 
-gui.add(options, 'size_P', 2,  8)
-gui.add(options, 'size_S', 2,  8)
-gui.add(options, 'size_M', 2,  8)
-gui.add(options, 'size_K', 2,  8)
-gui.add(options, 'size_A', 2,  8)
+gui.add(options, 'size_P', 3,  9)
+gui.add(options, 'size_S', 3,  9)
+gui.add(options, 'size_M', 3,  9)
+gui.add(options, 'size_K', 3,  9)
+gui.add(options, 'size_A', 3,  9)
 
 
 gui.addColor(options, 'color').onChange(function (e) {
