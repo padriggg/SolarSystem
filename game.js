@@ -42,7 +42,7 @@ const ambLight = new THREE.AmbientLight(0xffffff, 0.2)
 const spotLight = new THREE.SpotLight( 0xffffff,1 );
 spotLight.position.set( 100, 1000, 100 );
 
-const hemLight=new THREE.HemisphereLight(0xffffff,0x080820, 0.5)
+const hemLight=new THREE.HemisphereLight(0xffffff,0x080820, 0.7)
 
 
 const pointLightHelp= new THREE.PointLightHelper(pointLight)
@@ -63,7 +63,7 @@ const parent0= new THREE.Object3D()
 
 
 const geometry = new THREE.SphereGeometry(35, 60, 60);
-const material = new THREE.MeshStandardMaterial({ roughness: 0.5, map: new THREE.TextureLoader().load('/pics/sun.jpg') });
+const material = new THREE.MeshStandardMaterial({ roughness: 0.5,metalness: 0.1, map: new THREE.TextureLoader().load('/pics/sun.jpg') });
 const sphere = new THREE.Mesh(geometry, material);
 sphere.position.y=0
 scene.add(sphere);
@@ -102,7 +102,8 @@ const options = {
   size_K: 4,
   size_A: 4, 
 
-  color: 0xffffff
+  color: 0xffffff,
+  zeus: false
 };
 
 
@@ -124,8 +125,8 @@ scene.add(parent);
 
 
 const geometry3 = new THREE.SphereGeometry(options.size_S, 60, 60, Math.PI/2, Math.PI, 0, Math.PI);
-const material31 = new THREE.MeshStandardMaterial({  roughness: 0.5, map: sim });
-const material311 = new THREE.MeshStandardMaterial({  roughness: 0.5, map: sim });
+const material31 = new THREE.MeshStandardMaterial({  roughness: 0.5, metalness: 0.5,  map: sim });
+const material311 = new THREE.MeshStandardMaterial({  roughness: 0.5,metalness: 0.5, map: sim });
 
 const stab2 = new THREE.Mesh(geometry3, material31);
 const stab20 = new THREE.Mesh(geometry3, material311);
@@ -166,7 +167,9 @@ const stab40 = new THREE.Mesh(geometry5, material511);
 stab40.rotation.y=Math.PI
 var combStab2= new THREE.Group()
 combStab2.add(stab4, stab40)
-combStab2.position.z=-280
+combStab2.position.z=-175
+combStab2.position.y=-60
+
 
 parent2.add(combStab2)
 scene.add(parent2);
@@ -183,7 +186,8 @@ const stab50 = new THREE.Mesh(geometry6, material611);
 stab50.rotation.y=Math.PI
 var combStab3= new THREE.Group()
 combStab3.add(stab5, stab50)
-combStab3.position.x=-353
+combStab3.position.x=-105
+combStab3.position.y=60
 
 parent3.add(combStab3)
 scene.add(parent3);
@@ -213,20 +217,53 @@ gui.add(options, 'size_A', 2,  8)
 gui.addColor(options, 'color').onChange(function (e) {
   hemLight.color.set(e)
   
-  
 })
 
-const loader = new THREE.CubeTextureLoader();
-const texture = loader.load([
-  './penguins/xpos.png',
-  './penguins/xneg.png',
-  './penguins/ypos.png',
-  './penguins/yneg.png',
-  './penguins/zpos.png',
-  './penguins/zneg.png',
-]);
+gui.add(options, 'zeus').onChange(function (e) {
+  const loader = new THREE.CubeTextureLoader();
 
-scene.background = texture;
+  if(e){
+  const texture = loader.load([
+    './penguins1/zeus_ft.jpg',
+    './penguins1/zeus_bk.jpg',
+    './penguins1/zeus_up.jpg',
+    './penguins1/zeus_dn.jpg',
+    './penguins1/zeus_rt.jpg',
+    './penguins1/zeus_lf.jpg',
+  ]);
+
+  scene.background = texture;
+
+}
+else{
+
+  const loader = new THREE.CubeTextureLoader();
+  const texture = loader.load([
+    './penguins/xpos.png',
+    './penguins/xneg.png',
+    './penguins/ypos.png',
+    './penguins/yneg.png',
+    './penguins/zpos.png',
+    './penguins/zneg.png',
+  ]);
+  
+  scene.background = texture;
+}
+
+  })
+
+  const loader = new THREE.CubeTextureLoader();
+  const texture = loader.load([
+    './penguins/xpos.png',
+    './penguins/xneg.png',
+    './penguins/ypos.png',
+    './penguins/yneg.png',
+    './penguins/zpos.png',
+    './penguins/zneg.png',
+  ]);
+  
+  scene.background = texture;
+
 // Animationsfunktion
 var animate = function () {
    requestAnimationFrame(animate);
