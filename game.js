@@ -34,9 +34,9 @@ const controls = new OrbitControls(camera, renderer.domElement);
 
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
-renderer.setPixelRatio(2);
+renderer.setPixelRatio(window.devicePixelRatio);
 
-camera.position.z = 130;
+camera.position.z = 200;
 
 //Licht
 const pointLight = new THREE.PointLight(0xffffff, 1.25);
@@ -47,7 +47,7 @@ const ambLight = new THREE.AmbientLight(0xffffff, 0.2);
 const spotLight = new THREE.SpotLight(0xffffff, 1);
 spotLight.position.set(100, 1000, 100);
 
-const hemLight = new THREE.HemisphereLight(0xffffff, 0x080820, 0.7);
+const hemLight = new THREE.HemisphereLight(0xffffff, 0x080820, 0.8);
 
 const pointLightHelp = new THREE.PointLightHelper(pointLight);
 
@@ -111,8 +111,11 @@ const options = {
   size_K: 4,
   size_A: 4,
 
+  stopp_speed: false,
+  falling_speed: 0.4,
   color: 0xffffff,
   zeus: false,
+  falling: false,
 };
 
 const geometry2 = new THREE.SphereGeometry(
@@ -226,7 +229,6 @@ stab40.rotation.y = Math.PI;
 var combStab2 = new THREE.Group();
 combStab2.add(stab4, stab40);
 combStab2.position.z = -187;
-combStab2.position.y = -65;
 
 parent2.add(combStab2);
 scene.add(parent2);
@@ -256,32 +258,13 @@ stab50.rotation.y = Math.PI;
 var combStab3 = new THREE.Group();
 combStab3.add(stab5, stab50);
 combStab3.position.x = -112;
-combStab3.position.y = 65;
 
 parent3.add(combStab3);
 scene.add(parent3);
 // Fügen Sie einen Eventlistener für das Klicken auf die Kugel hi
 
-// Fügen Sie eine Lichtquelle hinzu
-
 const gui = new dat.GUI();
-
-gui.add(options, "speed_P", 0, 0.06);
-gui.add(options, "speed_S", 0, 0.06);
-gui.add(options, "speed_M", 0, 0.06);
-gui.add(options, "speed_K", 0, 0.06);
-gui.add(options, "speed_A", 0, 0.06);
-
-gui.add(options, "size_P", 3, 9);
-gui.add(options, "size_S", 3, 9);
-gui.add(options, "size_M", 3, 9);
-gui.add(options, "size_K", 3, 9);
-gui.add(options, "size_A", 3, 9);
-
-gui.addColor(options, "color").onChange(function (e) {
-  hemLight.color.set(e);
-});
-
+// Fügen Sie eine Lichtquelle hinzu
 gui.add(options, "zeus").onChange(function (e) {
   const loader = new THREE.CubeTextureLoader();
 
@@ -323,19 +306,57 @@ const texture = loader.load([
 
 scene.background = texture;
 
+gui.add(options, "speed_P", 0, 0.05);
+gui.add(options, "speed_S", 0, 0.05);
+gui.add(options, "speed_M", 0, 0.05);
+gui.add(options, "speed_K", 0, 0.05);
+gui.add(options, "speed_A", 0, 0.05);
+
+gui.add(options, "stopp_speed").onChange(function (e) {
+  if (e) {
+    options.stopp = true;
+  }
+});
+
+gui.add(options, "size_P", 3, 9);
+gui.add(options, "size_S", 3, 9);
+gui.add(options, "size_M", 3, 9);
+gui.add(options, "size_K", 3, 9);
+gui.add(options, "size_A", 3, 9);
+
+gui.addColor(options, "color").onChange(function (e) {
+  hemLight.color.set(e);
+});
+
+gui.add(options, "falling").onChange(function (e) {
+  if (e) {
+    options.falling = true;
+  }
+});
+
+gui.add(options, "falling_speed", 0.1, 0.8);
+
+let step = 0;
+
+const geometry33 = new THREE.PlaneGeometry(600, 600);
+
+const material34 = new THREE.MeshStandardMaterial({
+  color: 0x555555,
+  roughness: 0.5,
+  side: THREE.DoubleSide,
+  wireframe: false,
+});
+
+const plane = new THREE.Mesh(geometry33, material34);
+
+plane.rotation.x = -0.5 * Math.PI;
+
+const ebeneY = 200;
+plane.position.y = -ebeneY;
+
 // Animationsfunktion
 var animate = function () {
   requestAnimationFrame(animate);
-
-  parent.rotateY(options.speed_P);
-
-  parent0.rotateY(options.speed_S);
-
-  parent1.rotateY(options.speed_M);
-
-  parent2.rotateY(options.speed_K);
-
-  parent3.rotateY(options.speed_A);
 
   sphere.rotateY(0.008);
 
@@ -345,15 +366,61 @@ var animate = function () {
   combStab2.scale.set(options.size_K, options.size_K, options.size_K);
   combStab3.scale.set(options.size_A, options.size_A, options.size_A);
 
-  combStab.rotateY(0.008);
-  combStab0.rotateY(0.008);
-  combStab1.rotateY(0.008);
-  combStab2.rotateY(0.008);
-  combStab3.rotateY(0.008);
+  combStab.rotateY(0.007);
+  combStab0.rotateY(0.007);
+  combStab1.rotateY(0.007);
+  combStab2.rotateY(0.007);
+  combStab3.rotateY(0.007);
 
-  //cube.rotateY(0.005)
+  if (options.falling) {
+    let dist = 150 + ebeneY;
+    scene.add(plane);
+    step += options.falling_speed;
+
+    parent.position.y =
+      dist * Math.abs(Math.cos((1 / Math.sqrt(dist)) * step)) - ebeneY + 15;
+    parent0.position.y =
+      dist * Math.abs(Math.cos((1 / Math.sqrt(dist)) * step)) - ebeneY + 15;
+    parent1.position.y =
+      dist * Math.abs(Math.cos((1 / Math.sqrt(dist)) * step)) - ebeneY + 15;
+    parent2.position.y =
+      dist * Math.abs(Math.cos((1 / Math.sqrt(dist)) * step)) - ebeneY + 15;
+    parent3.position.y =
+      dist * Math.abs(Math.cos((1 / Math.sqrt(dist)) * step)) - ebeneY + 15;
+  } else {
+    //scene.remove(plane);
+
+    parent.position.y = 0;
+    parent0.position.y = 0;
+    parent1.position.y = 0;
+    parent2.position.y = -65;
+    parent3.position.y = 65;
+  }
+
+  if (options.stopp_speed) {
+    parent.rotateY(0);
+
+    parent0.rotateY(0);
+
+    parent1.rotateY(0);
+
+    parent2.rotateY(0);
+
+    parent3.rotateY(0);
+  } else {
+    parent.rotateY(options.speed_P);
+
+    parent0.rotateY(options.speed_S);
+
+    parent1.rotateY(options.speed_M);
+
+    parent2.rotateY(options.speed_K);
+
+    parent3.rotateY(options.speed_A);
+  }
 
   renderer.render(scene, camera);
 };
+//cube.rotateY(0.005)
 
 animate();
