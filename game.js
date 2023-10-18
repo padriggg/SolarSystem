@@ -1,4 +1,5 @@
-import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.118/build/three.module.js";
+//import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.118/build/three.module.js";
+
 import { GLTFLoader } from "https://cdn.jsdelivr.net/npm/three@0.118.1/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.118/examples/jsm/controls/OrbitControls.js";
 
@@ -141,7 +142,7 @@ const stab10 = new THREE.Mesh(geometry2, material211);
 stab10.rotation.y = Math.PI;
 var combStab = new THREE.Group();
 combStab.add(stab1, stab10);
-combStab.position.z = -75;
+combStab.position.z = -85;
 
 parent.add(combStab);
 scene.add(parent);
@@ -172,7 +173,7 @@ const stab20 = new THREE.Mesh(geometry3, material311);
 stab20.rotation.y = Math.PI;
 var combStab0 = new THREE.Group();
 combStab0.add(stab2, stab20);
-combStab0.position.z = -150;
+combStab0.position.z = -185;
 
 parent0.add(combStab0);
 scene.add(parent0);
@@ -201,7 +202,7 @@ const stab30 = new THREE.Mesh(geometry4, material411);
 stab30.rotation.y = Math.PI;
 var combStab1 = new THREE.Group();
 combStab1.add(stab3, stab30);
-combStab1.position.x = -225;
+combStab1.position.x = -285;
 
 parent1.add(combStab1);
 scene.add(parent1);
@@ -230,7 +231,7 @@ const stab40 = new THREE.Mesh(geometry5, material511);
 stab40.rotation.y = Math.PI;
 var combStab2 = new THREE.Group();
 combStab2.add(stab4, stab40);
-combStab2.position.z = -187;
+combStab2.position.z = -235;
 
 parent2.add(combStab2);
 scene.add(parent2);
@@ -259,7 +260,7 @@ const stab50 = new THREE.Mesh(geometry6, material611);
 stab50.rotation.y = Math.PI;
 var combStab3 = new THREE.Group();
 combStab3.add(stab5, stab50);
-combStab3.position.x = -112;
+combStab3.position.x = -135;
 
 parent3.add(combStab3);
 scene.add(parent3);
@@ -340,7 +341,7 @@ gui.add(options, "falling_speed", 0.1, 0.8);
 
 let step = 0;
 
-const geometry33 = new THREE.PlaneGeometry(550, 550);
+const geometry33 = new THREE.PlaneGeometry(600, 600);
 
 const material34 = new THREE.MeshStandardMaterial({
   color: 0x666666,
@@ -396,8 +397,8 @@ var animate = function () {
     parent.position.y = 0;
     parent0.position.y = 0;
     parent1.position.y = 0;
-    parent2.position.y = -65;
-    parent3.position.y = 65;
+    parent2.position.y = -80;
+    parent3.position.y = 80;
   }
 
   if (options.stopp_speed) {
