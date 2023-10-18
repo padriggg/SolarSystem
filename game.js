@@ -24,7 +24,7 @@ window.addEventListener("resize", () => {
 // Initialisieren Sie die Szene, die Kamera und das Renderer
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(
-  75,
+  70,
   window.innerWidth / window.innerHeight,
   0.1,
   10000
@@ -69,7 +69,7 @@ const normalTexture = new THREE.TextureLoader().load("/pics/normal.jpg");
 
 const geometry = new THREE.SphereGeometry(35, 60, 60);
 const material = new THREE.MeshStandardMaterial({
-  roughness: 0.2,
+  roughness: 0.1,
   metalness: 0.1,
   map: new THREE.TextureLoader().load("/pics/sun.jpg"),
   normalMap: normalTexture,
@@ -98,6 +98,8 @@ const pat1 = new THREE.TextureLoader().load("/pics/pa1.png");
 
 const gros = new THREE.TextureLoader().load("/pics/a.png");
 
+const haus = new THREE.TextureLoader().load("/pics/haus.png");
+
 const options = {
   speed_S: 0.03,
   speed_P: 0.03,
@@ -105,11 +107,11 @@ const options = {
   speed_K: 0.03,
   speed_A: 0.03,
 
-  size_S: 4,
-  size_P: 4,
-  size_M: 4,
-  size_K: 4,
-  size_A: 4,
+  size_S: 5,
+  size_P: 5,
+  size_M: 5,
+  size_K: 5,
+  size_A: 5,
 
   stopp_speed: false,
   falling_speed: 0.4,
@@ -338,13 +340,14 @@ gui.add(options, "falling_speed", 0.1, 0.8);
 
 let step = 0;
 
-const geometry33 = new THREE.PlaneGeometry(600, 600);
+const geometry33 = new THREE.PlaneGeometry(550, 550);
 
 const material34 = new THREE.MeshStandardMaterial({
-  color: 0x555555,
-  roughness: 0.5,
+  color: 0x666666,
+  roughness: 0.6,
   side: THREE.DoubleSide,
   wireframe: false,
+  map: haus,
 });
 
 const plane = new THREE.Mesh(geometry33, material34);
